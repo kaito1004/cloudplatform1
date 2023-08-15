@@ -1,0 +1,79 @@
+<body>
+  <p class="px">勤怠管理システム</p>
+  <form action="#">
+    <label class="label" for="name">名前</label>
+    <input id="name" type="text" name="name">
+    <label class="label" for="no">番号</label>
+    <input id="no" type="text" name="no">
+    <label class="label" for="date">日付</label>
+    <input id="date" type="date" name="date">
+    <label class="label" for="week">曜日</label>
+    <select name="week" id="week">
+      <option value="月曜日">月</option>
+      <option value="火曜日">火</option>
+      <option value="水曜日">水</option>
+      <option value="木曜日">木</option>
+      <option value="金曜日">金</option>
+      <option value="土曜日">土</option>
+      <option value="日曜日">日</option>
+    </select>
+    <label class="label" for="time">開始時刻</label>
+    <input id="starttime" type="time" name="starttime">
+    <label class="label" for="time">終了時刻</label>
+    <input id="endtime" type="time" name="endtime">
+    <label class="label" for="time">休憩時間</label>
+    <input id="resttime" type="time" name="resttime" value="01:00">
+    <label class="label" for="message">行なった業務内容</label>
+    <textarea id="message" name="comment"></textarea>
+    <input type="button" id="button" name="button" onclick="addBtnClick()" value="送信"></select>
+  </form>
+</body>
+
+  <style>
+      
+      body{
+        background: linear-gradient(#f06330, #ffb499);
+      }
+      .px{
+        font-size: 60px;
+        text-align: center;
+        text-shadow: 0 0 0.2em rgba(255,255,255,1);
+      }
+      .label{
+        display: block;
+        font-size:40px;
+        text-align:center;
+        line-height:0.95em;
+        font-weight:bold;
+        color: #01579B;
+        text-shadow: 0 0 0.2em rgba(255,255,255,1);
+      }
+      #name, #no, #message, #date, #week, #starttime, #endtime, #resttime, #button{
+        display: block;
+        margin: 30px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+      }
+</style>
+
+<script>
+   var date = new Date();
+
+        var yyyy = date.getFullYear();
+        var mm = ("0"+(date.getMonth()+1)).slice(-2);
+        var dd = ("0"+date.getDate()).slice(-2);
+
+    document.getElementById("date").value=yyyy+'-'+mm+'-'+dd;
+    
+     function addBtnClick(){
+       const name = document.getElementById('name').value;
+       const no = document.getElementById('no').value;
+       const date = document.getElementById('date').value;
+       const week = document.getElementById('week').value;
+       const starttime = document.getElementById('starttime').value;
+       const endtime = document.getElementById('endtime').value;
+       const resttime = document.getElementById('resttime').value;
+       const message = document.getElementById('message').value;
+       google.script.run.addData(name,no,date,week,starttime,endtime,resttime,message);
+     }
+</script>
